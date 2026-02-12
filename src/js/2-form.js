@@ -19,6 +19,12 @@ let formData = {
 };
 const form = document.querySelector('.feedback-form');
 const localStorageKey = 'feedback-form-state';
+let dataFromLocalStorage = getLocalStorageData(localStorageKey);
+if (dataFromLocalStorage) {
+  console.log(dataFromLocalStorage);
+  formData = { ...formData, ...dataFromLocalStorage };
+  setDataToField();
+}
 
 form.addEventListener('input', event => {
   if (Object.keys(formData).includes(event.target.name)) {
@@ -41,10 +47,3 @@ form.addEventListener('submit', event => {
   }
   alert('Fill please all fields');
 });
-
-let dataFromLocalStorage = getLocalStorageData(localStorageKey);
-if (dataFromLocalStorage) {
-  console.log(dataFromLocalStorage);
-  formData = { ...formData, ...dataFromLocalStorage };
-  setDataToField();
-}
