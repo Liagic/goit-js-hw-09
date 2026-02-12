@@ -29,13 +29,17 @@ form.addEventListener('input', event => {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  if (formData.email.trim() === '' || formData.message.trim() === '') {
-    alert('Fill please all fields');
+  if (formData.email && formData.message) {
+    console.log(formData);
+    localStorage.removeItem(localStorageKey);
+    formData = {
+      email: '',
+      message: '',
+    };
+    form.reset();
     return;
   }
-  console.log(formData);
-  localStorage.removeItem(localStorageKey);
-  form.reset();
+  alert('Fill please all fields');
 });
 
 let dataFromLocalStorage = getLocalStorageData(localStorageKey);
